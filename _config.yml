@@ -2,5 +2,5 @@
 permalink: /:year/:title/
 paginate: 10
 exclude: []
-name: spector-in-london
-baseurl: /spector-in-london/
+name: spector-in-london.github.io
+baseurl: /spector-in-london.github.io/
