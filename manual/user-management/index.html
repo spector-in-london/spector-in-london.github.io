@@ -41,7 +41,7 @@
                         </p>
 
                         <ul class="nav nav-pills nav-stacked">
-                                                            <li class="navitems active">
+                                                            <li class="navitems">
                                     <a href="http://spector-in-london.github.io/index.html">
                                         Introduction
                                     </a>
@@ -174,7 +174,7 @@
                                         Basic Concepts
                                     </a>
                                 </li>
-                                                            <li class="navitems">
+                                                            <li class="navitems active">
                                     <a href="http://spector-in-london.github.io/manual/user-management/index.html">
                                         LDAP / User Management
                                     </a>
@@ -245,25 +245,337 @@
             <div class="wy-nav-content">
                 <div class="rst-content">
                     <div role="main" class="document">
-                        <h1 id="trust-in-the-internet-is-at-an-all-time-low">Trust in the Internet is at an all time low.</h1>
+                        <h1 id="user-management">User Management</h1>
 <div id="generated-toc" class="generate_from_h2"></div>
-<h2 id="its-time-for-action">It's time for action.</h2>
-<p>We all make multiple trust assumptions every day. And in truth most of them are justified and we are rarely disappointed. Indeed it would be hard to imagine a more difficult environment than one in which most of our trust assumptions proved false.
-Maybe in the Garden of Eden we all originally trusted one another.</p>
-<h2 id="example-of-mathjax">Example of MathJax</h2>
-<p>Three types of Elliptic curve are supported for the implementation of
-Elliptic Curve Cryptography (ECC), but curves are limited to popular
-families that support faster implementation. Weierstrass curves are
-supported using the Short Weierstrass representation:-</p>
-<p>$$y^2=x^3+Ax+B$$</p>
-<p>where $A=0$ or $A=-3$. Edwards curves are supported using both regular
-and twisted Edwards format:-</p>
-<p>$$Ax^2+y^2=1+Bx^2y^2$$</p>
-<p>where $A=1$ or $A=-1$. Montgomery curves are represented as:-</p>
-<p>$$y^2=x^3+Ax^2+x$$</p>
-<p>where $A$ must be small.</p>
-<h2 id="announcement-list">Announcement List</h2>
-<p>Have we made progress on Grav? Because I am getting a lot of CousCous.</p>
+<p>Snipe-IT comes with ability to manage users within the system.</p>
+<h2 id="user-throttling--unsuspending-users">User Throttling / Unsuspending Users</h2>
+<p>If a user locks themselves out by attempting and failing to login too many times (default is 5 failed attempts), they will be locked out of the system for 15 minutes. If you need to unlock them before the 15 minutes is up, you can manually unsuspend them by going to the People section, searching for their name, and then clicking the unsuspend icon.</p>
+<p><img src="/img/unsuspend-user.png" alt="Unsuspend" /></p>
+<hr />
+<h2 id="permissions">Permissions</h2>
+<table>
+<thead>
+<tr>
+<th>Ability</th>
+<th>Super User</th>
+<th>Admin</th>
+<th>Reporter</th>
+<th>User</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Create Companies</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Delete Companies</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Create Asset Models</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Delete Asset Models</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Create Asset Categories</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Delete Asset Categories</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Create Manufacturer</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Delete Manufacturer</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Create Suppliers</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Delete Suppliers</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Create Status Labels</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Delete Status Labels</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Create Asset Depreciation</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Delete Asset Depreciation</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Create Locations</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Delete Locations</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Create Groups</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Delete Groups</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Take Backup</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Delete Backup</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Edit System Settings</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Create Users</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Remove Users</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Create Assets</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Edit Super Users</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Unlock Users</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Edit Users Permissions</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>View Items Assigned to User</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Request Assets</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Generate Reports</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="optional-ldap-configuration">Optional: LDAP Configuration</h2>
+<p><strong>Note: You must have the <code>php-ldap</code> extension installed for LDAP integration to work.</strong></p>
+<p>To set up your Snipe-IT installation to be able to use LDAP for user login and import, go to <code>Admin &gt; Settings</code> and scroll down to the LDAP settings sections.</p>
+<p>If you don't have an LDAP server (or don't wish to import your users, or allow them to login using their LDAP credentials), you can skip this step.</p>
+<p>The LDAP functionality will import any users in your LDAP/Active Directory, but will leave existing users untouched.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Example</th>
+<th>Notes</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LDAP Server</td>
+<td><code>ldap://ldap.example.com</code></td>
+<td>The URL of the LDAP server.</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>LDAP Bind Username</td>
+<td><code>cn=read-only-admin,dc=example,dc=com</code></td>
+<td>Username to use to connect authenticate to LDAP.</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>LDAP Bind Password</td>
+<td><code>password</code></td>
+<td>Password to use when authenticating to LDAP.</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Base Bind DN</td>
+<td><code>dc=example,dc=com</code></td>
+<td>The base where the search for users will be executed.</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>LDAP Filter</td>
+<td><code>&amp;(cn=*)</code></td>
+<td>The search filter for the LDAP query.</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Username Field</td>
+<td><code>uid</code></td>
+<td>The name of the field in your LDAP that you want to use for Snipe-IT username.</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Last Name</td>
+<td><code>sn</code></td>
+<td>The name of the field in your LDAP to use for last name. This is often <code>sn</code> (for surname)</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>LDAP First Name</td>
+<td><code>cn</code></td>
+<td>The name of the field in your LDAP to use for first name.</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>LDAP Authentication query</td>
+<td><code>uid="</code></td>
+<td>The LDAP query we should use to search your LDAP users. (This is usually <code>samaccountname=</code> in Active Directory, <code>uid="</code> in non-AD LDAP.)</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>LDAP Version</td>
+<td><code>3</code></td>
+<td>Version of LDAP. This is usually going to be <code>3</code></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>LDAP Active Flag</td>
+<td><code>active</code></td>
+<td>Only necessary if you use a field in LDAP to indicate if the user is active. Can otherwise be left blank.</td>
+<td>No</td>
+</tr>
+<tr>
+<td>LDAP Employee Number</td>
+<td></td>
+<td>Only necessary if you use a field in LDAP to store an employee number. Can otherwise be left blank.</td>
+<td>No</td>
+</tr>
+<tr>
+<td>LDAP Email</td>
+<td><code>mail</code></td>
+<td>LDAP field that should map to an email address for the user</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note: In most cases, all attribute values you enter should be all lowercase.</strong></p>
+<p>Once your settings are entered, make sure you check the <code>LDAP Integration</code> checkbox to enable LDAP authentication.</p>
+<h3 id="example-settings">Example Settings</h3>
+<p>We use a public LDAP server by <a href="http://www.forumsys.com/tutorials/integration-how-to/ldap/online-ldap-test-server/">Forumsys</a> to test LDAP functionality. To test using this server, use the LDAP Server <code>ldap://ldap.forumsys.com</code>.</p>
                     </div>
 
                     <hr/>

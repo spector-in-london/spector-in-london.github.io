@@ -41,12 +41,12 @@
                         </p>
 
                         <ul class="nav nav-pills nav-stacked">
-                                                            <li class="navitems active">
+                                                            <li class="navitems">
                                     <a href="http://spector-in-london.github.io/index.html">
                                         Introduction
                                     </a>
                                 </li>
-                                                            <li class="navitems">
+                                                            <li class="navitems active">
                                     <a href="http://spector-in-london.github.io/requirements.html">
                                         Why Milagro?
                                     </a>
@@ -245,25 +245,30 @@
             <div class="wy-nav-content">
                 <div class="rst-content">
                     <div role="main" class="document">
-                        <h1 id="trust-in-the-internet-is-at-an-all-time-low">Trust in the Internet is at an all time low.</h1>
-<div id="generated-toc" class="generate_from_h2"></div>
-<h2 id="its-time-for-action">It's time for action.</h2>
-<p>We all make multiple trust assumptions every day. And in truth most of them are justified and we are rarely disappointed. Indeed it would be hard to imagine a more difficult environment than one in which most of our trust assumptions proved false.
-Maybe in the Garden of Eden we all originally trusted one another.</p>
-<h2 id="example-of-mathjax">Example of MathJax</h2>
-<p>Three types of Elliptic curve are supported for the implementation of
-Elliptic Curve Cryptography (ECC), but curves are limited to popular
-families that support faster implementation. Weierstrass curves are
-supported using the Short Weierstrass representation:-</p>
-<p>$$y^2=x^3+Ax+B$$</p>
-<p>where $A=0$ or $A=-3$. Edwards curves are supported using both regular
-and twisted Edwards format:-</p>
-<p>$$Ax^2+y^2=1+Bx^2y^2$$</p>
-<p>where $A=1$ or $A=-1$. Montgomery curves are represented as:-</p>
-<p>$$y^2=x^3+Ax^2+x$$</p>
-<p>where $A$ must be small.</p>
-<h2 id="announcement-list">Announcement List</h2>
-<p>Have we made progress on Grav? Because I am getting a lot of CousCous.</p>
+                        <h1 id="system-requirements">System Requirements</h1>
+<p>The requirements for Snipe-IT are fairly standard for a modern web server, and most servers will have most or all of these components already installed. If for some reason you don't have them installed, they are relatively easy to add.</p>
+<h2 id="general-system-requirements">General System Requirements</h2>
+<ul>
+<li>PHP 5.4 or later: <a href="http://php.net/manual/en/install.unix.debian.php"><i class="fa fa-linux"></i></a> <a href="http://www.microsoft.com/web/gallery/install.aspx?appid=PHP54"><i class="fa fa-windows"></i></a></li>
+<li>PHP Extensions: MCrypt, Fileinfo, php-pdo, php-mysql, php-mbstring, php-curl</li>
+<li>MySQL or MariaDB</li>
+<li>SSH access to the server (if using Linux)</li>
+<li>GD Library (&gt;=2.0) or Imagick PHP extension (&gt;=6.3.8)</li>
+<li>php-ldap extension (only if using LDAP)</li>
+</ul>
+<h2><i class="fa fa-linux"></i> Requirements Specific to Linux/OSX</h2>
+<ul>
+<li>Mod Rewrite</li>
+</ul>
+<h2><i class="fa fa-windows"></i> Requirements Specific to Windows Server</h2>
+<ul>
+<li>IIS</li>
+<li>IIS URL Rewrite</li>
+<li>MariaDB 10.0.14 for Windows  <a href="https://downloads.mariadb.org/interstitial/mariadb-10.0.14/winx64-packages/mariadb-10.0.14-winx64.msi/from/http%3A//mirror.aarnet.edu.au/pub/MariaDB">64-bit</a> | <a href="https://downloads.mariadb.org/interstitial/mariadb-10.0.14/win32-packages/mariadb-10.0.14-win32.msi/from/http%3A//mirror.aarnet.edu.au/pub/MariaDB">32-bit</a></li>
+<li><a href="http://phpmanager.codeplex.com/">PHP Manager for IIS</a> (makes managing PHP on IIS much easier)</li>
+<li><a href="https://getcomposer.org/Composer-Setup.exe">Composer install with the shell menus</a></li>
+<li><a href="http://www.notepad-plus-plus.org/download/v6.6.6.html">Notepad++</a> for editing files</li>
+</ul>
                     </div>
 
                     <hr/>

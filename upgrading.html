@@ -41,7 +41,7 @@
                         </p>
 
                         <ul class="nav nav-pills nav-stacked">
-                                                            <li class="navitems active">
+                                                            <li class="navitems">
                                     <a href="http://spector-in-london.github.io/index.html">
                                         Introduction
                                     </a>
@@ -132,7 +132,7 @@
                                         Manually Editing Data
                                     </a>
                                 </li>
-                                                            <li class="navitems">
+                                                            <li class="navitems active">
                                     <a href="http://spector-in-london.github.io/upgrading.html">
                                         Upgrading
                                     </a>
@@ -245,25 +245,21 @@
             <div class="wy-nav-content">
                 <div class="rst-content">
                     <div role="main" class="document">
-                        <h1 id="trust-in-the-internet-is-at-an-all-time-low">Trust in the Internet is at an all time low.</h1>
-<div id="generated-toc" class="generate_from_h2"></div>
-<h2 id="its-time-for-action">It's time for action.</h2>
-<p>We all make multiple trust assumptions every day. And in truth most of them are justified and we are rarely disappointed. Indeed it would be hard to imagine a more difficult environment than one in which most of our trust assumptions proved false.
-Maybe in the Garden of Eden we all originally trusted one another.</p>
-<h2 id="example-of-mathjax">Example of MathJax</h2>
-<p>Three types of Elliptic curve are supported for the implementation of
-Elliptic Curve Cryptography (ECC), but curves are limited to popular
-families that support faster implementation. Weierstrass curves are
-supported using the Short Weierstrass representation:-</p>
-<p>$$y^2=x^3+Ax+B$$</p>
-<p>where $A=0$ or $A=-3$. Edwards curves are supported using both regular
-and twisted Edwards format:-</p>
-<p>$$Ax^2+y^2=1+Bx^2y^2$$</p>
-<p>where $A=1$ or $A=-1$. Montgomery curves are represented as:-</p>
-<p>$$y^2=x^3+Ax^2+x$$</p>
-<p>where $A$ must be small.</p>
-<h2 id="announcement-list">Announcement List</h2>
-<p>Have we made progress on Grav? Because I am getting a lot of CousCous.</p>
+                        <h1 id="upgrading">Upgrading</h1>
+<p>Updating Snipe-IT should be pretty straightforward. Simply pull down the newest release, copy the files over, and run whatever commands the release notes specify. Your configuration files won’t be overwritten, since you had to copy them over from the example configs, and your version isn’t in version control.</p>
+<p>You may want to backup the <code>app/config/app.php</code> file however, as that one file will be overwritten. If you forget to back it up, it's not usually a big deal, just go back in after upgrading and set your timezone back to the one you had before. </p>
+<p><strong>Always backup your database and configuration files before upgrading.</strong> We try very hard to make sure that all database changes are non-destructive, but you should always backup beforehand anyway. You will never regret backing up your database. You may regret not doing so, so it’s just better to get into the habit.</p>
+<p>If you don’t plan on contributing code to Snipe-IT, you should always grab the latest stable release from the releases page, and avoid using the <code>develop</code> or <code>master</code> branches.</p>
+<p>Whenever you pull down a new version from master or develop, or when you grab the latest official release, make sure to run the following commands via command line:</p>
+<pre><code>php composer.phar install --no-dev --prefer-source
+php composer.phar dump-autoload
+php artisan migrate</code></pre>
+<p>(Developers should remove the <code>--no-dev</code> flag, so they have unit test frameworks and debugging tools.)</p>
+<p>Forgetting to run these commands can mean your DB might end up out of sync with the new files you just pulled, or you may have some funky cached autoloader values.</p>
+<p>It’s a good idea to get into the habit of running these every time you pull anything new down. If there are no database changes to migrate, it won't hurt anything to run migrations anyway, you’ll just see &quot;Nothing to migrate&quot;.</p>
+<p>In some cases, it can help to delete the contents (just the contents, not the directories themselves) of <code>app/storage/cache</code> and <code>app/storage/views</code>.</p>
+<p>If you have any issues upgrading, check the <a href="common-issues.html">common issues</a> page for a fix. If you don’t see your issue listed there, open an issue on Github and we’ll try to get you sorted out. Be sure to provide the information outlined in the <a href="getting-help.html">Getting Help</a> section of this site so that we have the info we need to assist you.</p>
+<p>IMPORTANT: If you’re upgrading from <code>v.0.3.0-alpha</code> or earlier, make sure to update your hostname information in <code>bootstrap/start.php</code>, per the new requirements in Laravel 4.1.</p>
                     </div>
 
                     <hr/>

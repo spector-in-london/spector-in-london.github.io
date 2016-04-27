@@ -41,7 +41,7 @@
                         </p>
 
                         <ul class="nav nav-pills nav-stacked">
-                                                            <li class="navitems active">
+                                                            <li class="navitems">
                                     <a href="http://spector-in-london.github.io/index.html">
                                         Introduction
                                     </a>
@@ -51,7 +51,7 @@
                                         Why Milagro?
                                     </a>
                                 </li>
-                                                            <li class="navitems">
+                                                            <li class="navitems active">
                                     <a href="http://spector-in-london.github.io/security.html">
                                         About pairing-based cryptography
                                     </a>
@@ -245,25 +245,13 @@
             <div class="wy-nav-content">
                 <div class="rst-content">
                     <div role="main" class="document">
-                        <h1 id="trust-in-the-internet-is-at-an-all-time-low">Trust in the Internet is at an all time low.</h1>
-<div id="generated-toc" class="generate_from_h2"></div>
-<h2 id="its-time-for-action">It's time for action.</h2>
-<p>We all make multiple trust assumptions every day. And in truth most of them are justified and we are rarely disappointed. Indeed it would be hard to imagine a more difficult environment than one in which most of our trust assumptions proved false.
-Maybe in the Garden of Eden we all originally trusted one another.</p>
-<h2 id="example-of-mathjax">Example of MathJax</h2>
-<p>Three types of Elliptic curve are supported for the implementation of
-Elliptic Curve Cryptography (ECC), but curves are limited to popular
-families that support faster implementation. Weierstrass curves are
-supported using the Short Weierstrass representation:-</p>
-<p>$$y^2=x^3+Ax+B$$</p>
-<p>where $A=0$ or $A=-3$. Edwards curves are supported using both regular
-and twisted Edwards format:-</p>
-<p>$$Ax^2+y^2=1+Bx^2y^2$$</p>
-<p>where $A=1$ or $A=-1$. Montgomery curves are represented as:-</p>
-<p>$$y^2=x^3+Ax^2+x$$</p>
-<p>where $A$ must be small.</p>
-<h2 id="announcement-list">Announcement List</h2>
-<p>Have we made progress on Grav? Because I am getting a lot of CousCous.</p>
+                        <h1 id="some-notes-on-security">Some Notes on Security</h1>
+<p>Snipe-IT was built with security in mind. We utilize bcrypt to handle passwords, which is an adaptive hash function based on the Blowfish symmetric block cipher cryptographic algorithm. Additionally, the software is designed in such a way to prevent brute forcing the password, with IP addresses and usernames locked out for 10 minutes after a specified number of login attempts.</p>
+<h2 id="additional-security">Additional Security</h2>
+<p>Although this is web-based software and must run on a web server, you may want to consider whether you actually need it accessible to the outside world. Running it on an internal network with ports closed to the outside world, or on AWS using a security group that prevents access from outside a selected static IP range (like your company network IP), may be something to consider.</p>
+<p>While most use cases won't be storing Personally Identifiable Information (PII), someone with the right motivation could gain useful knowledge about the number of employees, types of assets, etc you maintain. While this information in and of itself isn't harmful, it could be helpful to Bad Guys in a targeted attack, so you should consider whether you want to limit access to it via IP or network rules.</p>
+<p>Also, running Snipe-IT over SSL is not required, but a good idea. (Running everything ever over SSL is a good idea at this point.)</p>
+<p>There are some optional configuration options that you can enable if you run Snipe-IT over HTTPS, such as <a href="http://docs.snipeitapp.com/installation/configuration.html#optional-set-cookies-to-https-only">enabling HTTPS-only cookies</a>, and setting your <a href="http://docs.snipeitapp.com/installation/configuration.html#optional-set-your-htaccess-to-redirect-to-ssl"><code>.htaccess</code> to redirect to the HTTPS version</a>.</p>
                     </div>
 
                     <hr/>

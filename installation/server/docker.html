@@ -41,7 +41,7 @@
                         </p>
 
                         <ul class="nav nav-pills nav-stacked">
-                                                            <li class="navitems active">
+                                                            <li class="navitems">
                                     <a href="http://spector-in-london.github.io/index.html">
                                         Introduction
                                     </a>
@@ -112,7 +112,7 @@
                                         <span class='subnav-indent'><i class='fa fa-caret-right'></i> XAMPP</span>
                                     </a>
                                 </li>
-                                                            <li class="navitems">
+                                                            <li class="navitems active">
                                     <a href="http://spector-in-london.github.io/installation/server/docker.html">
                                         <span class='subnav-indent'><i class='fa fa-caret-right'></i> Docker</span>
                                     </a>
@@ -245,25 +245,80 @@
             <div class="wy-nav-content">
                 <div class="rst-content">
                     <div role="main" class="document">
-                        <h1 id="trust-in-the-internet-is-at-an-all-time-low">Trust in the Internet is at an all time low.</h1>
-<div id="generated-toc" class="generate_from_h2"></div>
-<h2 id="its-time-for-action">It's time for action.</h2>
-<p>We all make multiple trust assumptions every day. And in truth most of them are justified and we are rarely disappointed. Indeed it would be hard to imagine a more difficult environment than one in which most of our trust assumptions proved false.
-Maybe in the Garden of Eden we all originally trusted one another.</p>
-<h2 id="example-of-mathjax">Example of MathJax</h2>
-<p>Three types of Elliptic curve are supported for the implementation of
-Elliptic Curve Cryptography (ECC), but curves are limited to popular
-families that support faster implementation. Weierstrass curves are
-supported using the Short Weierstrass representation:-</p>
-<p>$$y^2=x^3+Ax+B$$</p>
-<p>where $A=0$ or $A=-3$. Edwards curves are supported using both regular
-and twisted Edwards format:-</p>
-<p>$$Ax^2+y^2=1+Bx^2y^2$$</p>
-<p>where $A=1$ or $A=-1$. Montgomery curves are represented as:-</p>
-<p>$$y^2=x^3+Ax^2+x$$</p>
-<p>where $A$ must be small.</p>
-<h2 id="announcement-list">Announcement List</h2>
-<p>Have we made progress on Grav? Because I am getting a lot of CousCous.</p>
+                        <h1 id="installing-snipe-it-on-docker">Installing Snipe-IT on Docker</h1>
+<p>The easiest way, by far, is to just use the version we push to <a href="https://hub.docker.com/r/snipe/snipe-it/">Docker Hub</a>:</p>
+<pre><code class="language-sh">docker pull snipe/snipe-it</code></pre>
+<p>Then you have a functioning Snipe-IT container. Skip ahead to &quot;How to get up and
+running&quot; to configure it and get it connected to your database.</p>
+<h2 id="how-to-get-up-and-running">How to get up and running</h2>
+<p>The best way to handle all of the various settings for your various containers is to use an <code>env-file</code>.
+See the Docker documentation for more details. It should be just a simple text file with environment
+variable names and values, separated by <code>=</code> signs.</p>
+<p>Your <code>docker.env</code> should look something like this:</p>
+<pre><code class="language-env"># Mysql Parameters
+MYSQL_ROOT_PASSWORD=YOUR_SUPER_SECRET_PASSWORD
+MYSQL_DATABASE=snipeit
+MYSQL_USER=snipeit
+MYSQL_PASSWORD=YOUR_snipeit_USER_PASSWORD
+
+# Email Parameters
+# - the hostname/IP address of your mailserver
+MAIL_PORT_587_TCP_ADDR=smtp.whatever.com
+#the port for the mailserver (probably 587, could be another)
+MAIL_PORT_587_TCP_PORT=587
+# the default from address, and from name for emails
+MAIL_ENV_FROM_ADDR=youremail@yourdomain.com
+MAIL_ENV_FROM_NAME=Your Full Email Name
+# - pick 'tls' for SMTP-over-SSL, 'tcp' for unencrypted
+MAIL_ENV_ENCRYPTION=tcp
+# SMTP username and password
+MAIL_ENV_USERNAME=your_email_username
+MAIL_ENV_PASSWORD=your_email_password
+
+# Snipe-IT Settings
+SNIPEIT_TIMEZONE=UTC
+SNIPEIT_LOCALE=en
+SERVER_URL=https://myserver.com</code></pre>
+<p>First get a MySQL container running. MySQL 5.6 or earlier are easiest.</p>
+<pre><code class="language-sh">docker run --name snipe-mysql --env-file=my_env_file -d -p $(docker-machine ip b2d)::3306 mysql:5.6</code></pre>
+<p><strong>WARNING:</strong> Newer MySQL containers (5.7 and later, or MariaDB) may run in strict-mode by default, and the initial migrations and application setup will fail in strict mode. If you want to use one of those versions, you need to disable strict mode first!</p>
+<p>That should set you up with your database to use. (You can also specify environment variables on the command-line instead of the env-file, but that can get very clunky very quickly; see <code>docker run --help</code> for details)</p>
+<ul>
+<li>If your Email solution requires its own container, start that container or service. Make sure to expose port 587 for mail submission, and use <code>--link mail:...</code>.</li>
+</ul>
+<h3 id="start-your-snipe-it-container">Start your Snipe-IT container</h3>
+<p>First off, decide whether or not you want to have your Snipe-IT container manage SSL for you, or not.</p>
+<h4 id="ssl-disabled">SSL disabled</h4>
+<p>Start your Snipe-IT container -</p>
+<pre><code class="language-sh">docker run -d -p $(docker-machine ip b2d)::80 --name="snipeit" --link snipe-mysql:mysql --env-file=my_env_file snipe-it</code></pre>
+<h4 id="ssl-enabled">SSL enabled</h4>
+<p>Start your Snipe-IT container - but make sure you can &quot;mount&quot; your local copies of your SSL key and SSL certificate onto the container.</p>
+<p>They're expected to be named exactly: <code>/etc/ssl/private/snipeit-ssl.key</code> and <code>/etc/ssl/private/snipeit-ssl.crt</code> for the key and certificate, respectively.</p>
+<pre><code class="language-sh">docker run -d -P --name="snipeit" --link snipe-mysql:mysql -v /Absolute/Path/To/Your/SSL_Cert_directory:/etc/ssl/private --env-file=my_env_file snipe-it</code></pre>
+<h3 id="email-management-access">Email, Management, Access</h3>
+<p>If you have a separate container running for email, you will also want a <code>--link</code> setting for email as well.</p>
+<p>You can find out what port Snipe-IT is running on with:</p>
+<pre><code class="language-sh">docker port snipeit</code></pre>
+<p>And finally, you can initialize the application and database like this:</p>
+<pre><code class="language-sh">docker exec -i -t snipeit php artisan app:install</code></pre>
+<p>(Go ahead and answer the questions however you like. Type 'yes' when asked whether or not you want to run migrations.)</p>
+<h2 id="for-development">For Development</h2>
+<p>You can build the snipe-it image using the <code>Dockerfile</code> at the root directory of Snipe-IT by doing this:</p>
+<pre><code class="language-sh">docker build -t snipe-it .</code></pre>
+<p>Then you can use your newly built image as <code>snipe-it</code></p>
+<p>When you call <code>docker run</code> - make sure to mount your own snipe-it directory <em>over</em> the /var/www/html directory. Something like:</p>
+<pre><code class="language-sh">docker run -d -v /Path/To/My/snipe-it/checkout:/var/www/html -p $(docker-machine ip b2d)::80  --name="snipeit" --link mysql:mysql snipeit</code></pre>
+<p>Then your local changes to the code will be reflected. You will have to re-run <code>composer install</code> -</p>
+<pre><code class="language-sh">docker exec -i -t snipeit composer install</code></pre>
+<p>You'll need to copy the docker/database.php file to <code>app/config/production/</code> , and copy the <code>app/config/production/app.example.php to app/config/production/app.php</code></p>
+<p>And also app:install -</p>
+<pre><code class="language-sh">docker exec -i -t snipeit php artisan app:install</code></pre>
+<p>And you may still need to generate the key with -</p>
+<pre><code class="language-sh">docker exec -i -t snipeit php artisan key:generate --env=production</code></pre>
+<p>While you're developing, you may need to occasionally run -</p>
+<pre><code class="language-sh">docker exec snipeit composer dump-autoload</code></pre>
+<p>To fix the autoloading cache (if, for example, your class names change, or you add new ones...)</p>
+<p><strong>NOTE: When upgrading your docker install, make a note of the app key in <code>app/config/production/app.php</code>. If you are using LDAP, your LDAP server password is encrypted using this app key, and you will have a bad time if your app key changes. The upgraded docker WILL change your app key, so just replace the newly created on with your old one. </strong> </p>
                     </div>
 
                     <hr/>

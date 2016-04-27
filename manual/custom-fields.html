@@ -41,7 +41,7 @@
                         </p>
 
                         <ul class="nav nav-pills nav-stacked">
-                                                            <li class="navitems active">
+                                                            <li class="navitems">
                                     <a href="http://spector-in-london.github.io/index.html">
                                         Introduction
                                     </a>
@@ -204,7 +204,7 @@
                                         Backups
                                     </a>
                                 </li>
-                                                            <li class="navitems">
+                                                            <li class="navitems active">
                                     <a href="http://spector-in-london.github.io/manual/custom-fields.html">
                                         Custom Fields and Fieldsets
                                     </a>
@@ -245,25 +245,64 @@
             <div class="wy-nav-content">
                 <div class="rst-content">
                     <div role="main" class="document">
-                        <h1 id="trust-in-the-internet-is-at-an-all-time-low">Trust in the Internet is at an all time low.</h1>
-<div id="generated-toc" class="generate_from_h2"></div>
-<h2 id="its-time-for-action">It's time for action.</h2>
-<p>We all make multiple trust assumptions every day. And in truth most of them are justified and we are rarely disappointed. Indeed it would be hard to imagine a more difficult environment than one in which most of our trust assumptions proved false.
-Maybe in the Garden of Eden we all originally trusted one another.</p>
-<h2 id="example-of-mathjax">Example of MathJax</h2>
-<p>Three types of Elliptic curve are supported for the implementation of
-Elliptic Curve Cryptography (ECC), but curves are limited to popular
-families that support faster implementation. Weierstrass curves are
-supported using the Short Weierstrass representation:-</p>
-<p>$$y^2=x^3+Ax+B$$</p>
-<p>where $A=0$ or $A=-3$. Edwards curves are supported using both regular
-and twisted Edwards format:-</p>
-<p>$$Ax^2+y^2=1+Bx^2y^2$$</p>
-<p>where $A=1$ or $A=-1$. Montgomery curves are represented as:-</p>
-<p>$$y^2=x^3+Ax^2+x$$</p>
-<p>where $A$ must be small.</p>
-<h2 id="announcement-list">Announcement List</h2>
-<p>Have we made progress on Grav? Because I am getting a lot of CousCous.</p>
+                        <h1 id="custom-fields-and-fieldsets">Custom Fields and Fieldsets</h1>
+<p>Custom fields and fieldsets are available in Snipe-IT versions <code>2.1.0-pre</code> and later.</p>
+<p>Custom fields allow you to track additional information about your assets that the default asset attributes don't cover.</p>
+<p>Think of custom fieldsets as collections of custom fields. You can have a custom fieldset with just one custom field in it, or multiple custom fields. The idea of fieldsets is to keep commonly used fields grouped together so you don't have to add fields one-by-one to asset models.</p>
+<p>Custom fieldsets are assigned at the asset model level. So, for example, if you track mobile phones as Assets, you could create custom fields for &quot;IMEI&quot;, &quot;SIM&quot;, &quot;Phone Number&quot;, etc.</p>
+<p><img src="/img/sim.png" alt="Create mobile phones fieldset" /></p>
+<p>You would then add all of those mobile phone related fields to a new &quot;Mobile Phones&quot; custom fieldset, and assign it to one of your mobile phone asset models.</p>
+<p><img src="/img/mobile-phones.png" alt="Create mobile phones fieldset" /></p>
+<p>When you're adding a field to a fieldset, you can select whether that field should be required, what order it should appear in, and then select the fieldset to add from the select box.</p>
+<p><img src="/img/add-to-fieldset.png" alt="Create mobile phones fieldset" /></p>
+<p>Then, for any mobile phone assets you create that belong to that asset model, the custom fields attributes will automatically appear.</p>
+<p>To break it down step by step:</p>
+<ul>
+<li>Create the new custom fields you want in your custom fieldset.</li>
+<li>Create the new custom fieldset, and add the custom fields you just created.</li>
+<li>Go to Admin &gt; Asset Models and edit an asset model, selecting the custom fieldset you just created.</li>
+</ul>
+<p>You can create the fields first, or the fieldset first, but be sure to add the new fields to your fieldset, and then associate that fieldset to an asset model to see those new fields on your asset forms.</p>
+<p>Once your asset models have custom fieldsets associated with them, your new values will appear on the asset view and edit pages, and in the main asset listing table. You will be able to search/sort on these fields (as well as show/hide them in the table view) the same as you can the other built-in fields.</p>
+<h3 id="custom-field-validation">Custom Field Validation</h3>
+<p>We have provided support for basic input validation on the custom fields you create. When creating the fields, you'll have the option of selecting the <code>Format</code> the text input for your new fields should be in when your admins add or edit assets. You have several pre-defined options:</p>
+<table>
+<thead>
+<tr>
+<th>Format</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ANY</code></td>
+<td>No input validation. Any text is acceptable.</td>
+</tr>
+<tr>
+<td><code>ALPHA</code></td>
+<td>Any alpha numeric text.</td>
+</tr>
+<tr>
+<td><code>NUMERIC</code></td>
+<td>Any numeric text.</td>
+</tr>
+<tr>
+<td><code>MAC</code></td>
+<td>Text formatted in MAC address format.</td>
+</tr>
+<tr>
+<td><code>IP</code></td>
+<td>Text formatted as an IPv4 address. (IPv6 is coming soon.)</td>
+</tr>
+<tr>
+<td><code>CUSTOM</code></td>
+<td>Custom regular expression.</td>
+</tr>
+</tbody>
+</table>
+<p>If you select <code>CUSTOM</code>, be sure to enter a valid regular expression in the <code>Custom Format</code> box below that select box.</p>
+<h3 id="notes">Notes:</h3>
+<p>There is currently no ability to import custom fields while importing assets. That's coming soon.</p>
                     </div>
 
                     <hr/>

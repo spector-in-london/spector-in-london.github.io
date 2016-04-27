@@ -41,7 +41,7 @@
                         </p>
 
                         <ul class="nav nav-pills nav-stacked">
-                                                            <li class="navitems active">
+                                                            <li class="navitems">
                                     <a href="http://spector-in-london.github.io/index.html">
                                         Introduction
                                     </a>
@@ -122,7 +122,7 @@
                                         Subdirectories
                                     </a>
                                 </li>
-                                                            <li class="navitems">
+                                                            <li class="navitems active">
                                     <a href="http://spector-in-london.github.io/installation/proxy.html">
                                         Using a Reverse Proxy
                                     </a>
@@ -245,25 +245,36 @@
             <div class="wy-nav-content">
                 <div class="rst-content">
                     <div role="main" class="document">
-                        <h1 id="trust-in-the-internet-is-at-an-all-time-low">Trust in the Internet is at an all time low.</h1>
+                        <h1 id="running-snipe-it-through-a-reverse-proxy">Running Snipe-IT Through a Reverse Proxy</h1>
 <div id="generated-toc" class="generate_from_h2"></div>
-<h2 id="its-time-for-action">It's time for action.</h2>
-<p>We all make multiple trust assumptions every day. And in truth most of them are justified and we are rarely disappointed. Indeed it would be hard to imagine a more difficult environment than one in which most of our trust assumptions proved false.
-Maybe in the Garden of Eden we all originally trusted one another.</p>
-<h2 id="example-of-mathjax">Example of MathJax</h2>
-<p>Three types of Elliptic curve are supported for the implementation of
-Elliptic Curve Cryptography (ECC), but curves are limited to popular
-families that support faster implementation. Weierstrass curves are
-supported using the Short Weierstrass representation:-</p>
-<p>$$y^2=x^3+Ax+B$$</p>
-<p>where $A=0$ or $A=-3$. Edwards curves are supported using both regular
-and twisted Edwards format:-</p>
-<p>$$Ax^2+y^2=1+Bx^2y^2$$</p>
-<p>where $A=1$ or $A=-1$. Montgomery curves are represented as:-</p>
-<p>$$y^2=x^3+Ax^2+x$$</p>
-<p>where $A$ must be small.</p>
-<h2 id="announcement-list">Announcement List</h2>
-<p>Have we made progress on Grav? Because I am getting a lot of CousCous.</p>
+<p>If you wish to use a Reverse Proxy in front of your web server, you'll need to take a few extra steps to make it work.</p>
+<p>A typical Reverse Proxy scenario looks like this:</p>
+<p>Internet <i class="fa fa-arrow-right"></i> Reverse Proxy Server (Public &amp; Private IPs) <i class="fa fa-arrow-right"></i> Web Server (Private IPs)</p>
+<p>The Reverse Proxy Server is functioning as a reverse proxy (Nginx, Squid, Apache's Mod_Proxy, or Varnish).</p>
+<p>In most deployments the Reverse Proxy will perform HTTP to HTTPS redirection and only pass requests and responses via HTTPS to the remote client.</p>
+<p>Scenario: <span style="color: red;"><strong>BROKEN</strong></span></p>
+<p>Client  <i class="fa fa-arrow-left"></i> HTTPS <i class="fa fa-arrow-right"></i>  Reverse Proxy Server   <i class="fa fa-arrow-left"></i> HTTP <i class="fa fa-arrow-right"></i> Web Server</p>
+<p>Scenario: <span style="color: green;"><strong>WORKS</strong></span></p>
+<p>Client <i class="fa fa-arrow-left"></i> HTTP <i class="fa fa-arrow-right"></i>  Reverse Proxy Server   <i class="fa fa-arrow-left"></i> HTTP <i class="fa fa-arrow-right"></i> Web Server <br>
+Client <i class="fa fa-arrow-left"></i> HTTPS <i class="fa fa-arrow-right"></i>  Reverse Proxy Server  <i class="fa fa-arrow-left"></i> HTTPS <i class="fa fa-arrow-right"></i> Web Server</p>
+<h2 id="explanation">Explanation</h2>
+<p>In the above scenario the generated HTML will reference <code>http://</code> instead of <code>https://</code> for all assets. This causes most browsers to throw security warnings and refuse to display the content. (Typically, you'll see mixed content warnings because the browser won't load insecure elements on an SSL page.)</p>
+<p><strong>This assumes that your Reverse Proxy Server and Web Server are correctly configured and working properly. Meaning you have other correctly functioning Applications behind the proxy and the Web Server for Snipe-IT works properly if accessed directly.</strong></p>
+<p>Snipe-IT is unaware that requests to the proxy are being handled through HTTPS instead of HTTP. As such no effort is made to generate HTTPS links for Assets (javascript, CSS, images, etc.)</p>
+<p>Snipe-IT needs to be made aware of the presence of the Reverse Proxy Server. The <code>X-Forwarded-Proto</code> header should be passed from the Reverse Proxy Server to the Web Server.</p>
+<h2 id="server-configuration">Server Configuration</h2>
+<p>In Nginx, you would use:</p>
+<pre><code>proxy_set_header X-Forwarded-Proto $scheme;</code></pre>
+<p>With Apache's Mod_Proxy, you would add:</p>
+<pre><code>RequestHeader set X-Forwarded-Proto "https"</code></pre>
+<p>to your virtual host configuration.</p>
+<h2 id="snipe-it-configurations">Snipe-IT Configurations</h2>
+<p>Copy the <code>app/config/packages/fideloper/proxy/config.example.php</code> to <code>app/config/packages/fideloper/proxy/config.php</code>, and change</p>
+<pre><code>'proxies' =&gt; '*'</code></pre>
+<p>to</p>
+<pre><code>'proxies' =&gt; array('YOUR.IP.GOES.HERE'),</code></pre>
+<p>replacing <code>YOUR.IP.GOES.HERE</code> with the IP address(es) of your Reverse Proxy. Note that IPs and CIDR Notation are accepted. <strong>Do not leave this as the default asterisk as that is highly insecure.</strong></p>
+<p>You may also want to see the <a href="../security.html">security notes</a> for additional steps you can take for SSL configurations.</p>
                     </div>
 
                     <hr/>
