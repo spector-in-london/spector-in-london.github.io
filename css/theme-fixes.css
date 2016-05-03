@@ -43,7 +43,7 @@ a:visited {
 }
 
 .wy-menu-vertical a:visited, .wy-menu-vertical a:link  {
-color: #b3b3b3;
+color: #EDEAEB;
 }
 
 .wy-side-nav-search a:visited, .wy-nav-top a:visited, .wy-side-nav-search a:link, .wy-nav-top a:link {
@@ -75,7 +75,7 @@ content: '';
 }
 
 li.active {
-background-color: #1b557a;
+background-color: #319CA4;
 }
 
 ul {
@@ -89,8 +89,8 @@ ul.nav {
 }
 
 .blue-alert {
-    background-color: #77b7e1;
-    border: 1px solid #57a6da;
+    background-color: #31BCA4;
+    border: 1px solid #40D37B;
     padding: 15px;
     color: white;
     min-height: 65px;
@@ -202,9 +202,9 @@ ul.nav {
      background: #fff;
  }
 
- table, th, td {
-     border: 1px solid #e1e4e5;
-}
+# table, th, td {
+#     border: 1px solid #e1e4e5;
+#}
 
 td, th {
     padding: 5px;
